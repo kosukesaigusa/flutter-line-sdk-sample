@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_line_sdk_sample/components/cached_network_image/circle_user_icon.dart';
 import 'package:flutter_line_sdk_sample/components/drawer/drawer.dart';

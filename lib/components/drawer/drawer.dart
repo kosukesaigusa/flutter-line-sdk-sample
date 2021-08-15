@@ -20,7 +20,7 @@ class AppDrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('ドロワーヘッダー'),
+            Text('Flutter LINE SDK sample'),
           ],
         ),
       );

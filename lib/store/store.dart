@@ -29,7 +29,9 @@ class Store extends ChangeNotifier {
   Future<LoginResult?> signIn() async {
     LoginResult result;
     try {
-      result = await LineSDK.instance.login();
+      result = await LineSDK.instance.login(
+        option: LoginOption(false, 'aggressive'),
+      );
     } on PlatformException catch (e) {
       print(e);
       throw PlatformException(code: e.code);

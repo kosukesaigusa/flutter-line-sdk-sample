@@ -27,7 +27,7 @@ class InitialWidget extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: StreamBuilder(
-            stream: initStream(context),
+            stream: initStream(),
             builder: (
               context,
               // ignore: avoid_types_on_closure_parameters
@@ -52,7 +52,7 @@ class InitialWidget extends StatelessWidget {
         ),
       );
 
-  Stream<UserState> initStream(BuildContext context) async* {
+  Stream<UserState> initStream() async* {
     final signedIn = await store.signedIn;
     if (signedIn) {
       yield const UserState(signedIn: true);
