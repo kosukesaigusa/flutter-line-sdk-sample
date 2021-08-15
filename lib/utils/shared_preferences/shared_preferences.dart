@@ -2,6 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 enum PreferenceKey {
   accessToken,
+  userId,
+  displayName,
+  pictureUrl,
 }
 
 extension PreferenceKeyExtention on PreferenceKey {
@@ -9,6 +12,12 @@ extension PreferenceKeyExtention on PreferenceKey {
     switch (this) {
       case PreferenceKey.accessToken:
         return 'accessToken';
+      case PreferenceKey.userId:
+        return 'userId';
+      case PreferenceKey.displayName:
+        return 'displayName';
+      case PreferenceKey.pictureUrl:
+        return 'pictureUrl';
     }
   }
 

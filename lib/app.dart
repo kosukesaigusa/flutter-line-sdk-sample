@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_line_sdk_sample/models/user_state/user_state.dart';
 import 'package:flutter_line_sdk_sample/pages/home/home_page.dart';
 import 'package:flutter_line_sdk_sample/pages/sign_in/sign_in_page.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
@@ -15,11 +16,6 @@ class App extends StatelessWidget {
       home: InitialWidget(),
     );
   }
-}
-
-class UserState {
-  const UserState({this.signedIn = false});
-  final bool signedIn;
 }
 
 /// アプリ起動時にはじめに生成されるウィジェット

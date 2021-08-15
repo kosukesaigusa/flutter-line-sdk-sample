@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:flutter_line_sdk_sample/pages/home/home_page.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
 import 'package:flutter_line_sdk_sample/utils/snackbar/show_snack_bar.dart';
@@ -19,7 +18,7 @@ class SignInPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  final result = await store.signLogin();
+                  final result = await store.signIn();
                   if (result == null) {
                     showFloatingSnackBar(context, 'ログインに失敗しました。');
                     return;
@@ -35,19 +34,6 @@ class SignInPage extends StatelessWidget {
                 }
               },
               child: const Text('LINE で Login する'),
-            ),
-            TextButton(
-              onPressed: () async {
-                final currentToken = await LineSDK.instance.currentAccessToken;
-                if (currentToken == null) {
-                  print('アクセストークンがありません');
-                  return;
-                }
-                print(currentToken.data);
-                print(currentToken.expiresIn);
-                print(currentToken.value);
-              },
-              child: const Text('確認'),
             ),
           ],
         ),
