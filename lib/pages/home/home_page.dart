@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:flutter_line_sdk_sample/components/cached_network_image/circle_user_icon.dart';
 import 'package:flutter_line_sdk_sample/components/drawer/drawer.dart';
 import 'package:flutter_line_sdk_sample/models/local_user_profile/local_user_profile.dart';
@@ -15,10 +16,13 @@ class HomePage extends StatelessWidget {
         drawer: AppDrawer(),
         body: FutureBuilder(
           future: store.getLocalUserProfile(),
+          // TODO: 下記で書き直したほうがスマートなので後で編集する
+          // future: LineSDK.instance.getProfile(),
           builder: (
             context,
             // ignore: avoid_types_on_closure_parameters
             AsyncSnapshot<LocalUserProfile> snapshot,
+            // AsyncSnapshot<UserProfile> snapshot,
           ) {
             if (!snapshot.hasData) {
               return const SizedBox();
