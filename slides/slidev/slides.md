@@ -226,7 +226,7 @@ FutureBuilder(
       children: [
         Text('表示名：${userProfile.displayName}'),
         userProfile.pictureUrl == null
-          ? Icon(Icons.person)
+          ? const Icon(Icons.person)
           : Image.network(userProfile.pictureUrl!),
       ],
     );
