@@ -1,16 +1,13 @@
 # flutter_line_sdk_sample
 
-A sample project to use flutter_line_sdk
+本リポジトリは、[flutter_line_sdk](https://pub.dev/packages/flutter_line_sdk) を用いた、LINE ログイン機能および公式アカウントの友だち追加機能を実装したアプリのサンプルです。
 
-## Getting Started
+2021 年 9 月 8 日 (水) 20:00 から [Flutter 大学](https://kboyflutteruniv.com/)で行われる LINE Developer Community とコラボ開催の勉強会の資料も兼ねています。
 
-This project is a starting point for a Flutter application.
+発表資料 ([Slidev](https://sli.dev/)) は [/slides/slidev/](https://github.com/KosukeSaigusa/flutter-line-sdk-sample/tree/main/slides/slidev) 以下に配置しています。
 
-A few resources to get you started if this is your first Flutter project:
+発表資料を Web ブラウザで確認したい場合は、下記のリンクに進んでください。
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## デモ
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+準備中...
