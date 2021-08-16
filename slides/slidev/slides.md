@@ -85,7 +85,7 @@ void main() {
 
 ios/Runner/Info.plist
 
-```
+```txt
 <key>CFBundleURLTypes</key>
 <array>
   <dict>
@@ -109,7 +109,7 @@ ios/Runner/Info.plist
 
 ios/Podfile
 
-```
+```txt
 target 'Runner' do
    use_frameworks!
    platform :ios, '10.0'
