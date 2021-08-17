@@ -28,3 +28,12 @@ p {
 strong {
   color: yellow;
 }
+
+code::before,
+code::after {
+  display: none;
+}
+
+code {
+  padding: 0 0.25rem;
+}
