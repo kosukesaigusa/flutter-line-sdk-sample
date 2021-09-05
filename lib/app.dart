@@ -3,6 +3,8 @@ import 'package:flutter_line_sdk_sample/models/user_state/user_state.dart';
 import 'package:flutter_line_sdk_sample/pages/home/home_page.dart';
 import 'package:flutter_line_sdk_sample/pages/sign_in/sign_in_page.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
+import 'package:flutter_line_sdk_sample/theme/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class App extends StatelessWidget {
@@ -10,8 +12,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter LINE SDK Sample',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: lightTheme.copyWith(
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
+      darkTheme: darkTheme.copyWith(
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: InitialWidget(),
     );

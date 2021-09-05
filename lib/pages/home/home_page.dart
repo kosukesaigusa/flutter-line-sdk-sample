@@ -13,13 +13,9 @@ class HomePage extends StatelessWidget {
           title: const Text('ホーム'),
         ),
         drawer: AppDrawer(),
-        body: FutureBuilder(
+        body: FutureBuilder<UserProfile>(
           future: LineSDK.instance.getProfile(),
-          builder: (
-            context,
-            // ignore: avoid_types_on_closure_parameters
-            AsyncSnapshot<UserProfile> snapshot,
-          ) {
+          builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const SizedBox();
             }

@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "import sorter",
+      "type": "shell",
+      "command": "flutter pub run import_sorter:main --no-comments"
+    }
+  ]
+}
