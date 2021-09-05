@@ -2,7 +2,7 @@
     package="com.kosukesaigusa.flutter_line_sdk_sample">
    <application
         android:label="flutter_line_sdk_sample"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
