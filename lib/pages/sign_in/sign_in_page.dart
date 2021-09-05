@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_line_sdk_sample/pages/home/home_page.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
 import 'package:flutter_line_sdk_sample/utils/snackbar/show_snack_bar.dart';
@@ -28,12 +29,24 @@ class SignInPage extends StatelessWidget {
                     (route) => false,
                   );
                   // ignore: avoid_catches_without_on_clauses
-                } catch (e) {
-                  // TODO: 後で書き直す
-                  showFloatingSnackBar(context, 'エラーが発生しました。');
+                } on PlatformException catch (e) {
+                  if (e.message != null) {
+                    showFloatingSnackBar(context, e.message!);
+                    return;
+                  }
+                  showFloatingSnackBar(context, 'キャンセルしました。');
                 }
               },
-              child: const Text('LINE で Login する'),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  'LINE で Login する',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

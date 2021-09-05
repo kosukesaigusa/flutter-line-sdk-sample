@@ -31,6 +31,7 @@ class AppDrawer extends StatelessWidget {
         onTap: () async {
           try {
             await store.signOut();
+            // ignore: avoid_catches_without_on_clauses
           } catch (e) {
             showFloatingSnackBar(context, 'エラーが発生しました。');
           }

@@ -3,7 +3,7 @@ import 'package:flutter_line_sdk_sample/app.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Counter increments smoke test', (tester) async {
     await tester.pumpWidget(App());
 
     // Verify that our counter starts at 0.

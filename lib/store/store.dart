@@ -35,8 +35,11 @@ class Store extends ChangeNotifier {
         option: LoginOption(false, 'aggressive'),
       );
     } on PlatformException catch (e) {
-      print(e.message);
-      throw PlatformException(code: e.code);
+      var message = 'エラーが発生しました。';
+      if (e.code == '3003') {
+        message = 'キャンセルしました。';
+      }
+      throw PlatformException(code: e.code, message: message);
     }
     return result;
   }

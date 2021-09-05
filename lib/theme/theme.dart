@@ -16,7 +16,6 @@ final baseTheme = ThemeData(
 final lightTheme = baseTheme.copyWith();
 final darkTheme = baseTheme.copyWith();
 
-/// アクセントカラーのスウォッチ
 /// 生成元：http://mcg.mbitson.com/#!?mcgpalette0=%2306c755
 const primarySwatch = MaterialColor(0xFF06c755, <int, Color>{
   50: Color(0xFFe1f8eb),
