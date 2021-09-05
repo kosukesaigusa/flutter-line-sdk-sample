@@ -26,13 +26,9 @@ class InitialWidget extends StatelessWidget {
         body: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: StreamBuilder(
+          child: StreamBuilder<UserState>(
             stream: initStream(),
-            builder: (
-              context,
-              // ignore: avoid_types_on_closure_parameters
-              AsyncSnapshot<UserState> snapshot,
-            ) {
+            builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
                   child: SpinKitCircle(
