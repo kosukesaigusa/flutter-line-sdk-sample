@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+import 'package:gap/gap.dart';
+
 import 'package:flutter_line_sdk_sample/components/cached_network_image/circle_user_icon.dart';
 import 'package:flutter_line_sdk_sample/components/drawer/drawer.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
-import 'package:gap/gap.dart';
 
 class HomePage extends StatelessWidget {
   final store = Store();

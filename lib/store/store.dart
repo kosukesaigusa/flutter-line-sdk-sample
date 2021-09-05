@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+
 import 'package:flutter_line_sdk_sample/utils/shared_preferences/shared_preferences.dart';
 
 class Store extends ChangeNotifier {

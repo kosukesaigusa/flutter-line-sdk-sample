@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:flutter_line_sdk_sample/models/user_state/user_state.dart';
 import 'package:flutter_line_sdk_sample/pages/home/home_page.dart';
 import 'package:flutter_line_sdk_sample/pages/sign_in/sign_in_page.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
 import 'package:flutter_line_sdk_sample/theme/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class App extends StatelessWidget {
   @override
