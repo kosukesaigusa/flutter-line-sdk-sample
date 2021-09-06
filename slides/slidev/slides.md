@@ -22,45 +22,37 @@ fonts:
 
 ## 自己紹介
 
-- 30 秒ほどで軽く自己紹介
+- Flutter エンジニア
+- Flutter 大学のメンバー、毎週水曜日の共同勉強会の開催にも関わる
+- 仕事でよく使う技術は、Flutter, Dart, Django, Python, TypeScript, Nuxt.js など
+- 個人開発や本業以外のプロジェクトでは、Flutter と Firebase を使うのが好き
+- 認証周りの知識にはまだまだ疎く、LINE API の使用経験などもない
 
 ---
 
 ## LINE ログインと Flutter LINE SDK
 
-以下のようなリンクを参考に、LINE ログインと Flutter LINE SDK について簡単に触れる。
+pub.dev に公開されているパッケージの README と LINE Developers のドキュメントに沿って進めると、簡単に実装できます！
 
-- [LINE Developers](https://developers.line.biz/ja/services/line-login/)
-- [flutter_line_sdk (GitHub)](https://github.com/line/flutter_line_sdk/)
-- [flutter_line_sdk (pub.dev)](https://pub.dev/packages/flutter_line_sdk)
+- [flutter_line_sdk](https://pub.dev/packages/flutter_line_sdk)
+- [LINE Developers](https://developers.line.biz/ja/docs/line-login/overview/)
+
+<img src="/pub_dev_flutter_line_sdk.png" class="h-72 rounded-xl" />
 
 ---
 
 ## LINE ログインを実装するメリット
 
-LINE DC の方からの内容と被ったりして問題にならなければ、考えられる Flutter アプリに LINE ログインを実装するメリットを軽く述べる。
-
 - 日本にいるスマホユーザーならほぼ全員が LINE アカウントを持っており、面倒なアカウント登録やプロフィール入力の手間が省ける。
-- ログイン時に LINE の公式アカウントと友だちになるよう促せる。それによって、たとえばサービスの利用状況に応じた最適な顧客とのコミュニケーションなどが可能になる。
+- 開発者はログイン時に LINE の公式アカウントと友だちになるよう促せる。それによって、たとえばサービスの利用状況に応じた最適な顧客とのコミュニケーションなどが可能になる。
 - [flutter_line_sdk (pub.dev)](https://pub.dev/packages/flutter_line_sdk) のおかげで実装もすごく簡単。
-
-
----
-
-## <strong>ここで LINE DC の方に必要があれば補足をして頂きたいです</strong>
-
-前のスライドで、自分なりに調べたり考えたりしてきて、LINE ログインをモバイルアプリに実装するメリットを述べてみようと思っていますが、LINE DC の方から補足するべきことがあれば、発表をスイッチして簡単に補足して頂くと良いかもなと思っています。
-
-必要がないと判断されればそれでも構いません。
 
 ---
 
 ## ハンズオンの内容
 
-当日のハンズオンの流れを説明する。
-
 1. Flutter アプリに [flutter_line_sdk](https://pub.dev/packages/flutter_line_sdk) を導入する。
-2. [LINE Developers](https://developers.line.biz/console/) でアカウントを作成し、LINE ログイン用のチャネルと、公式アカウントのチャネル（今回は Messaging API にした）を作成し、LINE ログイン用のチャネルに Messaging API を連携させる。
+2. [LINE Developers](https://developers.line.biz/console/) で作成したアカウントを用いて、LINE ログイン用のチャネルと、公式アカウントのチャネル（今回は Messaging API）を作成し、LINE ログイン用のチャネルに Messaging API を連携させる。
 3. Flutter アプリで LINE ログインの API を実行する。`LoginOption` の `botPrompt` を指定して、ログイン時に公式アカウントを友だち追加するよう促す。ログインが成功してアクセストークンがもらえること、LINE の表示名やプロフィール画像ももらえることを確認する
 4. LINE アカウントのプロフィール情報を Flutter の Widget として表示する
 
@@ -70,20 +62,20 @@ LINE DC の方からの内容と被ったりして問題にならなければ、
 
 基本的には [flutter_line_sdk](https://pub.dev/packages/flutter_line_sdk) の README に沿って進めれば OK。
 
-pubspec.yaml
+`pubspec.yaml` に flutter_line_sdk を記述する。
 
 ```yaml
 dependencies:
   flutter_line_sdk: ^2.0.0
 ```
 
-main.dart
+`main.dart` の runApp に下記の記述を加える。
 
 ```dart
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // チャンネル ID は後で LINE Developers の LINE ログインのチャネルから取得する
-  LineSDK.instance.setup('<チャンネル ID>').then((_) {
+  // チャネル ID は後で LINE Developers の LINE ログインのチャネルから取得する
+  LineSDK.instance.setup('<チャネル ID>').then((_) {
     print('LineSDK Prepared');
   });
   runApp(App());
@@ -92,7 +84,7 @@ void main() {
 
 ---
 
-ios/Runner/Info.plist
+`ios/Runner/Info.plist` に [flutter_line_sdk](https://pub.dev/packages/flutter_line_sdk) の指示通りの下記の内容を加える。
 
 ```txt
 <key>CFBundleURLTypes</key>
@@ -116,7 +108,7 @@ ios/Runner/Info.plist
 
 ---
 
-ios/Podfile
+`ios/Podfile` にも書き加える。iOS バージョン 10.0 以上がサポートされている。
 
 ```txt
 target 'Runner' do
@@ -124,15 +116,15 @@ target 'Runner' do
    platform :ios, '10.0'
 ```
 
-Flutter アプリのソースコードとしての導入準備は以上で終わり。
+ソースコードに Android 関連の特別な設定の記述はない。
+
+Flutter アプリのソースコードとしての導入準備は以上で終わり！
 
 ---
 
 ## 手順 2. [LINE Developers](https://developers.line.biz/console/) での準備
 
-[LINE Developers](https://developers.line.biz/console/) のコンソール上で必要になる準備を、コンソール画面のスクリーンショットを交えながら簡単に説明する。
-
-スクリーンショットなどは準備中。説明する内容は下記の通り。
+Flutter アプリ内のソースコードの編集の他に、下記のような [LINE Developers](https://developers.line.biz/console/) のコンソール画面での設定をいくつか行います。
 
 - [LINE Developers](https://developers.line.biz/console/) でアカウントを作成する
 - LINE ログインのチャネルを作成する
@@ -142,9 +134,68 @@ Flutter アプリのソースコードとしての導入準備は以上で終わ
 
 ---
 
+[LINE Developers](https://developers.line.biz/console/) でアカウントを作成する。
+
+LINE を普段使っているスマートフォンが手元にあれば、QR コードで簡単に入れます。
+
+<img src="/LINE_Business_ID.png" class="h-80 rounded-xl" />
+
+---
+
+プロバイダーを作成する。
+
+<img src="/LINE_Developers_top.png" class="h-100 rounded-xl" />
+
+---
+
+プロバイダーを作成する。
+
+<img src="/LINE_Developers_create_provider.png" class="h-100 rounded-xl" />
+
+---
+
+新規チャネル（LINE ログイン）を作成する。
+
+<img src="/LINE_Developers_create_channel_1.png" class="h-100 rounded-xl" />
+
+---
+
+新規チャネル（LINE ログイン）を作成する。
+
+<img src="/LINE_Developers_create_channel_2.png" class="h-100 rounded-xl" />
+
+---
+
+LINE ログインチャネル (Messaging API) を作成
+
+<img src="/LINE_Developers_create_channel_3.png" class="h-100 rounded-xl" />
+
+---
+
+新規チャネルで次の設定を行う。
+
+- 「チャネル基本設定 > リンクされたボット」に先程作った Messaging API のチャネル（ボット）を指定して連携する
+- 「LINE ログインアプリ」から、iOS, Android の bundle ID やパッケージ名を設定する。
+
+<img src="/LINE_Developers_link_bot.png" class="h-36 rounded-xl" />
+
+---
+
 ## 手順 3. Flutter アプリで LINE ログインの API を実行する
 
-LINE ログインの API を実行する記述は下記のようにするだけ。
+LINE ログインのチャネル ID をして、
+
+```dart
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LineSDK.instance.setup('<チャネル ID>').then((_) {
+    print('LineSDK Prepared');
+  });
+  runApp(App());
+}
+```
+
+LINE ログインの API を実行する記述は下記のようにするだけ！
 
 ```dart
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
@@ -157,15 +208,6 @@ Future<void> signIn() async {
   }
 }
 ```
-
-Simulator の画面か、予め準備した画面収録を共有しながら
-
-- LINE アプリがインストールされていない Simulator では LINE ログインのための Web 画面が開かれて、LINE アカウントのメールアドレスとパスワードを入力して認証ができること
-- LINE アプリをインストール済みの実機では、LINE アプリが起動して認証が済むこと
-
-をその場で見てもらう。
-
-App Store Connect の TestFlight では、内部テスター配信できるようにしているので、Flutter 大学内の何人かの希望者に予めテスター登録してもらっておいて、その場でやってみるのも良いかもしれない。
 
 ---
 
@@ -180,16 +222,6 @@ result = await LineSDK.instance.login();
 - `accessToken.expiresIn` にはアクセストークンの有効期限（2592000秒 = 30日）が入っていること
 
 も確認する。
-
----
-
-## <strong>ここで富士榮さんに解説をして頂きたいです</strong>
-
-前のスライドで、`login` メソッドを実行して認証を済ませ、アクセストークンがもらえたことを確認した時点で発表を一度ストップし、富士榮さんの解説にスイッチして、次ページに列挙した内容や、その他面白そうな内容を解説して頂きたいです。
-
-私の発表は完全に一度中断しても構いません。
-
-10 分でも 20 分でも、時間をかけて詳しく説明して頂いても良いですし、ここでは概要のみを解説して、私の発表が終了した後に改めて時間を取って行っていただくでも私としては構いません。全体の会の進行・タイムスケジュールも踏まえてよしなに決めてください。
 
 ---
 
