@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 
-import 'package:flutter_line_sdk_sample/utils/shared_preferences/shared_preferences.dart';
-
 class Store extends ChangeNotifier {
   factory Store() => _instance;
   Store._internal();
@@ -17,11 +15,6 @@ class Store extends ChangeNotifier {
       return false;
     }
     return storedAccessToken.value.isNotEmpty;
-  }
-
-  /// SharedPreferences からアクセストークンの文字列を取得する
-  Future<String> get accessToken async {
-    return PreferenceKey.accessToken.getString();
   }
 
   /// アクセストークンを取得する
