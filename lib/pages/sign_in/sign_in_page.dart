@@ -29,7 +29,6 @@ class SignInPage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => HomePage()),
                     (route) => false,
                   );
-                  // ignore: avoid_catches_without_on_clauses
                 } on PlatformException catch (e) {
                   if (e.message != null) {
                     showFloatingSnackBar(context, e.message!);

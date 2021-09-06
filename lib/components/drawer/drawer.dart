@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_line_sdk_sample/pages/sign_in/sign_in_page.dart';
 import 'package:flutter_line_sdk_sample/store/store.dart';
@@ -32,8 +33,7 @@ class AppDrawer extends StatelessWidget {
         onTap: () async {
           try {
             await store.signOut();
-            // ignore: avoid_catches_without_on_clauses
-          } catch (e) {
+          } on PlatformException catch (_) {
             showFloatingSnackBar(context, 'エラーが発生しました。');
           }
           await Navigator.of(context).pushAndRemoveUntil<void>(
