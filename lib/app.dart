@@ -34,37 +34,35 @@ class InitialWidget extends StatelessWidget {
   final store = Store();
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: StreamBuilder<UserState>(
-            stream: initStream(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
+        body: StreamBuilder<UserState>(
+          stream: initStream(),
+          builder: (context, snapshot) {
+            switch (snapshot.data) {
+              case null:
+              case UserState.waiting:
                 return Center(
                   child: SpinKitCircle(
                     size: 24,
                     color: Theme.of(context).primaryColor,
                   ),
                 );
-              }
-              final userState = snapshot.data!;
-              if (userState.signedIn) {
-                return HomePage();
-              } else {
+              case UserState.signedOut:
                 return SignInPage();
-              }
-            },
-          ),
+              case UserState.signedIn:
+                return HomePage();
+            }
+          },
         ),
       );
 
+  /// ユーザーのログイン状態を Stream で
   Stream<UserState> initStream() async* {
+    yield UserState.waiting;
     final signedIn = await store.signedIn;
     if (signedIn) {
-      yield const UserState(signedIn: true);
+      yield UserState.signedIn;
     } else {
-      yield const UserState(signedIn: false);
+      yield UserState.signedOut;
     }
   }
 }

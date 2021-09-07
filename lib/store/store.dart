@@ -17,11 +17,6 @@ class Store extends ChangeNotifier {
     return storedAccessToken.value.isNotEmpty;
   }
 
-  /// アクセストークンを取得する
-  Future<StoredAccessToken?> get storedAccessToken async {
-    return LineSDK.instance.currentAccessToken;
-  }
-
   /// LINE SDK でログインする
   Future<LoginResult?> signIn() async {
     LoginResult result;

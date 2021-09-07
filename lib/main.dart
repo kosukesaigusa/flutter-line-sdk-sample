@@ -9,7 +9,6 @@ import 'package:flutter_line_sdk_sample/store/store.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final store = Store();
-  // Channel ID: 1656319899
   LineSDK.instance.setup('1656319899').then((_) {
     print('LineSDK Prepared');
   });

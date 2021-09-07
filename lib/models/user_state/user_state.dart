@@ -1,4 +1,1 @@
-class UserState {
-  const UserState({this.signedIn = false});
-  final bool signedIn;
-}
+enum UserState { waiting, signedIn, signedOut }
