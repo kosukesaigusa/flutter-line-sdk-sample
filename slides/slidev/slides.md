@@ -211,39 +211,38 @@ Future<void> signIn() async {
 
 ---
 
-`login` メソッドの返す `LoginResult` クラスを少し見てみる。
+`login` メソッドの返す `LoginResult` クラスをデバッグしながら見てみる。
 
 ```dart
 result = await LineSDK.instance.login();
 ```
 
-- `result.accessToken` の getter `AccessToken` 型のアクセストークンインスタンスがもらえること
-- `accessToken.value` でアクセストークンの文字列を確認できること
-- `accessToken.expiresIn` にはアクセストークンの有効期限（2592000秒 = 30日）が入っていること
+- `result.accessToken` の getter で `AccessToken` 型のアクセストークンインスタンスがもらえていることが確認できる
+- `accessToken.value` でアクセストークンの文字列を確認できる
+- `accessToken.expiresIn` にはアクセストークンの有効期限（2592000秒 = 30日）が入っている
+- `accessToken.userProfile` に、LINE に登録しているプロフィール情報が入っている
 
-も確認する。
+この後の発表では Fujie さんが
 
----
+- LINE ログインの裏側で何が起こっているのか
+- OpenID Connect について
 
-- LINE ログインの概要
-- `login` メソッドを実行後、LINE アプリのインストールされていない Simulator では Web 画面が開かれて LINE アカウントのメールアドレスとパスワードを入力したとき、または LINE アプリがインストール済みの実機では LINE アプリが起動して "Logging in..." というのが表示されてそれが済んだとき、その間に何が起こっているのか
-- アクセストークンを受け取るとはどういうことなのか、その有効期限（2592000秒 = 30日）とは何なのか、何のためにあるのか
-- リンク：[LINE Developers 「アクセストークンを管理する」](https://developers.line.biz/ja/docs/line-login/managing-access-tokens/)で説明されているような、「アクセストークンの有効期限が切れたときは、リフレッシュトークンを使用して新しいアクセストークンを取​得」することや「リフレッシュトークンは、アクセストークンが発行されてから最長90日間有効です。リフレッシュトークンの有効期限が切れた場合は、ユーザーに再度ログインを要求して新しいアクセストークンを生成する必要があります」ということについての補足
-- 上記の LINE ログインに関する説明から派生して、認証・認可や Open ID Connect, OAuth 2.0 周りの基礎知識や重要知識、ID 周りで事故らないソフトウェアを作るための ID・ログイン周りの知識などでエンジニアが学ぶべきこと
+などのお話をして下さいます！🙌
 
 ---
 
-続いて、LINE ログイン時に LINE ログインチャネルと連携している LINE 公式アカウントを友だち追加するよう促すオプションを追加する方法を述べる。`login` メソッドに下記のオプションを記述するだけ。
+LINE ログイン時に LINE ログインチャネルと連携している LINE 公式アカウントを友だち追加するよう促すには...
+
+`login` メソッドに下記のオプションを記述するだけ！
 
 参考：[LINEログインしたときにLINE公式アカウントを友だち追加する（ボットリンク）](https://developers.line.biz/ja/docs/line-login/link-a-bot/)
 
 ```dart
 result = await LineSDK.instance.login(
-  // デモで見せるような、LINEログインの同意画面の後に、LINE 公式アカウントを友だち追加するかどうか確認する画面を表示する場合
+  // LINEログインの同意画面の後に、LINE 公式アカウントを友だち追加するかどうか確認する画面を表示する場合
   option: LoginOption(false, 'aggressive'),
   // LINEログインの同意画面の下部に、LINE 公式アカウントを友だち追加するオプションを表示する場合
   // option: LoginOption(false, 'normal'),
-
   // 補足：LoginOption の第一引数は真偽値型の `onlyWebLogin`
 );
 ```
@@ -271,14 +270,36 @@ print(result.pictureUrl);
 
 ## 手順 4：LINE アカウントのプロフィール情報を Flutter の Widget として表示する
 
+今回はシングルトンの `Store` クラスに LINE SDK のログイン・ログアウト、サインイン済みチェックを取得するためのメソッドや getter を定義することにしました。
+
+下記のように、ルートウィジェットの上の `ChangeNotifierProvider.value()` で `Store` クラスのインスタンスを指定すると、アプリケーションのどこからでも同じインスタンスを参照することができます。
+
+```dart
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  final store = Store();
+  LineSDK.instance.setup('1656319899').then((_) {
+    print('LineSDK Prepared');
+  });
+  runApp(
+    ChangeNotifierProvider<Store>.value(
+      value: store,
+      builder: (context, child) => App(),
+    ),
+  );
+}
+```
+
+---
+
 LINE アカウントのプロフィール情報は、`Text` ウィジェットや `Image` ウィジェットなどで表示すれば OK！
 
 Flutter 大学で勉強している皆さんには簡単ですね！（`LineSDK.instance.getProfile()` が `Future<UserProfile>` を返すので、`FutureBuilder` を使いました）
 
 ```dart
-FutureBuilder(
+FutureBuilder<UserProfile>(
   future: LineSDK.instance.getProfile(),
-  builder: (context, AsyncSnapshot<UserProfile> snapshot){
+  builder: (context, snapshot){
     if (!snapshot.hasData) {
       return const SizedBox();
     }
@@ -299,4 +320,7 @@ FutureBuilder(
 
 ## まとめ
 
-最後に実装のポイントや、やってみた感想や「こんなふうに応用すると面白そうだ」というのを最後に述べて終わり。
+- LINE SDK for Flutter の活用はドキュメント通りに進めれば非常に簡単に実装可能！
+- LINE Messaging API を活用すれば、よりユーザーのセグメントに合わせた、またはユーザーとの相互のコミュニケーションを伴うアプリの開発・運用が可能になる
+- Flutter 大学の方の中には、Firebase Auth を好んで使っている方も多いと思いますが、カスタムトークン認証を実装すれば、LINE ログインと Firebase Auth とを連携させることも可能（後日実装して記事を書きたいです）
+- エンジニアが知っておくべき認証周りの知識はこの後の Fujie さんの発表で勉強しましょう！🧑‍💻 💪
