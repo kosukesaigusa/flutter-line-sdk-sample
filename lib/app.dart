@@ -55,7 +55,7 @@ class InitialWidget extends StatelessWidget {
         ),
       );
 
-  /// ユーザーのログイン状態を Stream で
+  /// ユーザーのログイン状態を確認して Stream で返す
   Stream<UserState> initStream() async* {
     yield UserState.waiting;
     final signedIn = await store.signedIn;
