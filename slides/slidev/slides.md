@@ -22,11 +22,27 @@ fonts:
 
 ## 自己紹介
 
+- Kosuke Saigusa
 - Flutter エンジニア
 - Flutter 大学のメンバー、毎週水曜日の共同勉強会の開催にも関わる
 - 仕事でよく使う技術は、Flutter, Dart, Django, Python, TypeScript, Nuxt.js など
 - 個人開発や本業以外のプロジェクトでは、Flutter と Firebase を使うのが好き
 - 認証周りの知識にはまだまだ疎く、LINE API の使用経験などもない
+
+リンクなど：
+
+- [Twitter](https://twitter.com/KosukeSaigusa)
+- [GitHub](https://github.com/KosukeSaigusa)
+- [Qiita](https://qiita.com/KosukeSaigusa)
+
+---
+
+## 本日の発表内容
+
+- [サンプルコード (GitHub: flutter-line-sdk-sample)](https://github.com/KosukeSaigusa/flutter-line-sdk-sample)
+- Flutter LINE SDK を使用して、Flutter アプリに LINE ログイン機能と、ログイン時に公式アカウントの友達追加を促す機能を備えたサンプルアプリをハンズオン形式で開発します！→ 実機でデモをお見せします 👀
+
+<img src="/flutter_line_sdk_app_logo.png" class="h-72 rounded-xl" />
 
 ---
 
@@ -183,7 +199,7 @@ LINE ログインチャネル (Messaging API) を作成
 
 ## 手順 3. Flutter アプリで LINE ログインの API を実行する
 
-LINE ログインのチャネル ID をして、
+LINE ログインのチャネル ID を指定して、
 
 ```dart
 void main() {
@@ -211,7 +227,7 @@ Future<void> signIn() async {
 
 ---
 
-`login` メソッドの返す `LoginResult` クラスをデバッグしながら見てみる。
+サンプルアプリのソースコードを解説しながら、`login` メソッドの返す `LoginResult` クラスをデバッグしながら見てみる。
 
 ```dart
 result = await LineSDK.instance.login();
