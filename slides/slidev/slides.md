@@ -16,7 +16,9 @@ fonts:
 
 # Flutter アプリで<br>LINE ログインを実装する
 
-2021-09-08 (水) Flutter 大学勉強会 LT by Kosuke Saigusa
+2021-09-08 (水) LT by Kosuke Saigusa
+
+LINE Developers Community とのコラボ勉強会
 
 ---
 
