@@ -14,7 +14,7 @@
 
 当日の YouTube 動画は下記のサムネイルをクリックしてご覧いただけます。
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=TT_RoA4ygEU&t=1399s" title="FlutterアプリでLINEログインを実装しよう！【LINE Developer Communityとコラボ】" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![FlutterアプリでLINEログインを実装しよう！【LINE Developer Communityとコラボ】](https://img.youtube.com/vi/TT_RoA4ygEU/0.jpg)](https://www.youtube.com/watch?v=TT_RoA4ygEU)
 
 ## デモ
 
